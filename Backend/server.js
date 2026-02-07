@@ -9,15 +9,14 @@ const taskRoutes = require("./routes/task");
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-
-app.use(cors());
 app.use(express.json());
 
-// Performance basic middleware
-// app.use((req, res, next) => {
-//   res.setHeader("X-Content-Type-Options", "nosniff");
-//   next();
-// });
+app.use(cors({
+  origin: [
+    "http://localhost:5173",
+    "https://task-manager1-nu.vercel.app"
+  ]
+}));
 
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log("MongoDB Connected"))
